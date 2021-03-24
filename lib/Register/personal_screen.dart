@@ -1,86 +1,134 @@
 import 'package:flutter/material.dart';
-import 'package:timeline_tile/timeline_tile.dart';
+import 'package:test1/Register/upload_data.dart';
 
-class RegisterScreen extends StatefulWidget {
-  static String routeName = "/register";
-
+class RegisterPage extends StatefulWidget {
   @override
-  _RegisterScreenState createState() => _RegisterScreenState();
+  _RegisterPageState createState() => _RegisterPageState();
 }
 
-class _RegisterScreenState extends State<RegisterScreen> {
+class _RegisterPageState extends State<RegisterPage> {
+  int _completePage;
+  int _currentPage;
+  @override
+  void initState() {
+    super.initState();
+    _completePage = 0;
+    _currentPage = 1;
+  }
+
+  Widget _divider(int i) {
+    return Expanded(
+      child: Divider(
+        color: _completePage > i ? Colors.grey[400] : Colors.grey[300],
+        thickness: 4.0,
+      ),
+    );
+  }
+
+  Widget _pagination({
+    @required int num,
+  }) {
+    return Container(
+      width: 32.0,
+      height: 32.0,
+      decoration: BoxDecoration(
+        color: _currentPage >= num ? Colors.grey[400] : Colors.grey[300],
+        shape: BoxShape.circle,
+      ),
+      child: Center(
+        child: Text(
+          "$num",
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          SizedBox(
-            width: 200,
-            height: 25,
-            child: TimelineTile(
-              axis: TimelineAxis.horizontal,
-              alignment: TimelineAlign.center,
-              isFirst: true,
-              endChild: Container(
-                child: Text("Personal"),
-                constraints: const BoxConstraints(minWidth: 50),
-              ),
-            ),
-          ),
-          SizedBox(
-            width: 200,
-            height: 100,
-            child: TimelineTile(
-              axis: TimelineAxis.horizontal,
-              alignment: TimelineAlign.center,
-              isLast: true,
-              endChild: Container(
-                  child: Text("Upload Data"),
-                  constraints: const BoxConstraints(minWidth: 50)),
-            ),
-          ),
-          Container(
-            padding: EdgeInsets.only(top: 50, left: 25, right: 25),
-            child: Column(
-              children: [
-                NamaField(),
-                SizedBox(height: 10),
-                NoKtpField(),
-                SizedBox(height: 10),
-                AlamatField(),
-                SizedBox(height: 10),
-                Container(
-                    padding: EdgeInsets.only(left: 75),
-                    child: Column(
+      resizeToAvoidBottomInset: false,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              padding: EdgeInsets.only(top: 50, left: 25, right: 25),
+              child: Column(
+                children: [
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 100),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
                       children: [
-                        KecamatanField(),
-                        SizedBox(height: 10),
-                        KelurahanField(),
-                        SizedBox(height: 10),
-                        KodePosField(),
-                        SizedBox(height: 10),
+                        _pagination(num: 1),
+                        _divider(1),
+                        _pagination(num: 2),
                       ],
-                    )),
-                SizedBox(
-                  height: 50,
-                  width: 125,
-                  child: FlatBgit addutton(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10)),
-                    color: Colors.blue,
-                    onPressed: () {},
-                    child: Text(
-                      "Next",
-                      style: TextStyle(
-                        fontSize: 18,
-                      ),
                     ),
                   ),
-                ),
-              ],
+                  SizedBox(height: 10),
+                  NamaField(),
+                  SizedBox(height: 10),
+                  NoKtpField(),
+                  SizedBox(height: 10),
+                  AlamatField(),
+                  SizedBox(height: 10),
+                  Container(
+                      padding: EdgeInsets.only(left: 50),
+                      child: Column(
+                        children: [
+                          KecamatanField(),
+                          SizedBox(height: 10),
+                          KelurahanField(),
+                          SizedBox(height: 10),
+                          KodePosField(),
+                          SizedBox(height: 10),
+                        ],
+                      )),
+                  PhoneField(),
+                  SizedBox(height: 10),
+                  EmailField(),
+                  SizedBox(height: 10),
+                  PasswordField(),
+                  SizedBox(height: 10),
+                  ConfirmPasswordField(),
+                  SizedBox(height: 10),
+                  NextButton(),
+                  SizedBox(height: 10),
+                ],
+              ),
             ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class NextButton extends StatelessWidget {
+  const NextButton({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 50,
+      width: 125,
+      child: MaterialButton(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        color: Colors.blue,
+        onPressed: () {
+          Navigator.pushNamed(context, PersonalDataPage.routeName);
+        },
+        child: Text(
+          "Next",
+          style: TextStyle(
+            fontSize: 18,
           ),
-        ],
+        ),
       ),
     );
   }

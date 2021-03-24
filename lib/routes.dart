@@ -1,9 +1,12 @@
-
 import 'package:flutter/material.dart';
+import 'package:test1/Register/main_register.dart';
+import 'package:test1/Register/register_verification.dart';
+import 'package:test1/Register/upload_data.dart';
 import 'package:test1/login.dart';
-import 'package:test1/register.dart';
 
 final Map<String, WidgetBuilder> routes = {
-  RegisterScreen.routeName: (context) => RegisterScreen(),
+  MainRegister.routeName: (context) => MainRegister(),
   LoginScreen.routeName: (context) => LoginScreen(),
+  PersonalDataPage.routeName: (context) => PersonalDataPage(),
+  Verification.routeName: (context) => Verification(),
 };
