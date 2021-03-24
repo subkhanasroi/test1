@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:test1/Register/register_verification.dart';
+import 'package:test1/HomePage/buttom_navbar.dart';
 
 class PersonalDataPage extends StatelessWidget {
   static String routeName = '/personaldata';
@@ -96,7 +96,10 @@ class _PersonalDataScreenState extends State<PersonalDataScreen> {
                   borderRadius: BorderRadius.circular(10)),
               color: Colors.blue,
               onPressed: () {
-                Navigator.pushNamed(context, Verification.routeName);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ButtonNavbar()),
+                );
               },
               child: Text(
                 "Next",

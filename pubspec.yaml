@@ -54,6 +54,11 @@ flutter:
   - assets/housekeeper.png
   - assets/hand_phone.png
   - assets/text.png
+  - assets/steve.png
+  - assets/hotel1.png
+  - assets/hotel2.png
+  - assets/hotel3.png
+  - assets/hotel4.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
