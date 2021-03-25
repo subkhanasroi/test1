@@ -43,6 +43,7 @@ class _ButtonNavbarState extends State<ButtonNavbar> {
       },
       child: Container(
         height: 60,
+        padding: EdgeInsets.only(top: 10),
         width: MediaQuery.of(context).size.width / 4,
         decoration: index == _selectedItemIndex
             ? BoxDecoration(

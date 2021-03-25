@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:test1/HomePage/Notification/notification_screen.dart';
 
 class HomePageScreen extends StatefulWidget {
   @override
@@ -175,7 +176,9 @@ class Notification extends StatelessWidget {
                     color: Colors.grey[500],
                     iconSize: 25,
                     icon: Icon(Icons.notifications),
-                    onPressed: () {}),
+                    onPressed: () {Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => NotificationScreen()));}),
               ),
             ),
           ),
