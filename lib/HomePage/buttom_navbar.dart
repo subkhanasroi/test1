@@ -25,16 +25,16 @@ class _ButtonNavbarState extends State<ButtonNavbar> {
       ),
       bottomNavigationBar: Row(
         children: [
-          buildNavbarItem(Icons.home_outlined, 0),
-          buildNavbarItem(Icons.insert_drive_file_outlined, 1),
-          buildNavbarItem(Icons.home_repair_service_outlined, 2),
-          buildNavbarItem(Icons.account_circle_outlined, 3),
+          buildNavbarItem(Icons.home_outlined, 0, 'Home'),
+          buildNavbarItem(Icons.insert_drive_file_outlined, 1, 'Task'),
+          buildNavbarItem(Icons.home_repair_service_outlined, 2, 'Wallet'),
+          buildNavbarItem(Icons.account_circle_outlined, 3, 'Profile'),
         ],
       ),
     );
   }
 
-  Widget buildNavbarItem(IconData icon, int index) {
+  Widget buildNavbarItem(IconData icon, int index, String text) {
     return GestureDetector(
       onTap: () {
         setState(() {
@@ -56,10 +56,22 @@ class _ButtonNavbarState extends State<ButtonNavbar> {
                     ? Colors.grey[200]
                     : Colors.grey)
             : BoxDecoration(),
-        child: Icon(
-          icon,
-          color:
-              index == _selectedItemIndex ? Colors.grey[300] : Colors.grey[300],
+        child: Column(
+          children: [
+            Icon(
+              icon,
+              color: index == _selectedItemIndex
+                  ? Colors.grey[300]
+                  : Colors.grey[300],
+            ),
+            Text(
+              text,
+              style: TextStyle(
+                  color: index == _selectedItemIndex
+                      ? Colors.grey[300]
+                      : Colors.grey[300]),
+            ),
+          ],
         ),
       ),
     );
