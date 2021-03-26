@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:test1/Register/personal_screen.dart';
 
-import 'package:test1/routes.dart';
+
 
 class MainRegister extends StatelessWidget {
   static String routeName = "/register";
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      routes: routes,
       theme: ThemeData(primaryColor: Colors.grey[300]),
       debugShowCheckedModeBanner: false,
       title: 'Register',

@@ -350,22 +350,22 @@ class _WalletScreenState extends State<WalletScreen> {
                       ),
                     ],
                   ),
+                  Container(
+                    width: 350,
+                    height: 40,
+                    decoration: BoxDecoration(
+                        color: Colors.grey[300],
+                        borderRadius: BorderRadius.circular(10)),
+                    child: Center(
+                        child: Text(
+                      'More',
+                      style: TextStyle(fontSize: 20),
+                    )),
+                  )
                 ],
               ),
             ),
           ),
-          Container(
-            width: 350,
-            height: 40,
-            decoration: BoxDecoration(
-                color: Colors.grey[300],
-                borderRadius: BorderRadius.circular(10)),
-            child: Center(
-                child: Text(
-              'More',
-              style: TextStyle(fontSize: 20),
-            )),
-          )
         ],
       ),
     );
@@ -398,7 +398,7 @@ class TotalWallet extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-        padding: EdgeInsets.only(top: 100),
+        padding: EdgeInsets.only(top: 100,bottom: 10),
         child: Column(
           children: [
             Text(

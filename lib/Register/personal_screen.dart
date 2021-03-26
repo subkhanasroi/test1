@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:test1/Register/upload_data.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -121,7 +122,10 @@ class NextButton extends StatelessWidget {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         color: Colors.blue,
         onPressed: () {
-          Navigator.pushNamed(context, PersonalDataPage.routeName);
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => PersonalDataPage()),
+          );
         },
         child: Text(
           "Next",

@@ -96,7 +96,7 @@ class _PersonalDataScreenState extends State<PersonalDataScreen> {
                   borderRadius: BorderRadius.circular(10)),
               color: Colors.blue,
               onPressed: () {
-                Navigator.push(
+                Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(builder: (context) => ButtonNavbar()),
                 );

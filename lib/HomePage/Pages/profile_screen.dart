@@ -6,71 +6,51 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  String nickname = 'John Wick';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Center(
-              child: Container(
-                  padding: EdgeInsets.symmetric(
-                    vertical: 50,
-                  ),
-                  child: Text(
-                    'Status : on Verification',
-                    style: TextStyle(fontSize: 20),
-                  )),
+            SizedBox(height: 50),
+            Text(
+              'Status : on Verification',
+              style: TextStyle(fontSize: 20),
             ),
+            SizedBox(height: 16),
             CircleAvatar(
               radius: 50,
               backgroundImage: AssetImage('assets/steve.png'),
             ),
-            Container(
-              padding: EdgeInsets.only(left: 150),
-              child: Row(
-                children: [
-                  Text(
-                    'John Wick',
-                    style: TextStyle(fontSize: 20),
-                  ),
-                  IconButton(
-                      icon: Icon(Icons.create_outlined),
-                      color: Colors.grey[400],
-                      onPressed: () {})
-                ],
-              ),
-            ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Container(
-                    padding: EdgeInsets.symmetric(horizontal: 35),
-                    child: Text('13', style: TextStyle(fontSize: 35))),
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 50),
-                  child: Row(
-                    children: [
-                      Icon(Icons.star),
-                      Text('4.9', style: TextStyle(fontSize: 35)),
-                    ],
-                  ),
+                Text(
+                  '$nickname',
+                  style: TextStyle(fontSize: 20),
                 ),
-                Container(
-                    padding: EdgeInsets.symmetric(horizontal: 10),
-                    child: Text('199', style: TextStyle(fontSize: 35)))
+                IconButton(
+                    icon: Icon(Icons.create_outlined),
+                    color: Colors.grey[400],
+                    onPressed: () async {
+                      String update = await showAlertDialog();
+                      print(update);
+                      if (update != null) {
+                        setState(() {
+                          nickname = update;
+                        });
+                      }
+                    })
               ],
             ),
             Row(
               children: [
-                Container(
-                    padding: EdgeInsets.symmetric(horizontal: 25),
-                    child: Text('total order', style: TextStyle(fontSize: 20))),
-                Container(
-                    padding: EdgeInsets.symmetric(horizontal: 30),
-                    child: Text('rating', style: TextStyle(fontSize: 20))),
-                Container(
-                    padding: EdgeInsets.symmetric(horizontal: 50),
-                    child: Text('point', style: TextStyle(fontSize: 20)))
+                detail(header: Text('13'), desc: 'Total order'),
+                detail(header: Row(children: [Icon(Icons.star),Text('4.9')],), desc: 'Total Rating'),
+                detail(header: Text('199'), desc: 'Point'),
               ],
             ),
             SizedBox(
@@ -110,6 +90,46 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ],
         ),
       ),
+    );
+  }
+
+  Widget detail({@required Widget header, @required String desc}) {
+    return Column(
+      children: [header, Text('$desc')],
+    );
+  }
+
+  Future showAlertDialog() {
+    TextEditingController edit = new TextEditingController();
+    // set up the buttons
+    Widget cancelButton = MaterialButton(
+        child: Text("Cancel"),
+        onPressed: () {
+          Navigator.of(context, rootNavigator: true).pop();
+        });
+    Widget continueButton = MaterialButton(
+      child: Text("Continue"),
+      onPressed: () {
+        Navigator.of(context, rootNavigator: true).pop(edit.text);
+      },
+    );
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text("Change Nickname"),
+      content: TextField(
+        controller: edit,
+      ),
+      actions: [
+        cancelButton,
+        continueButton,
+      ],
+    );
+    // show the dialog
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
     );
   }
 }
