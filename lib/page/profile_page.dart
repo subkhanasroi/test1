@@ -19,20 +19,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: _scaffoldKey,
-      body: _buildBody()
-    );
+    return Scaffold(key: _scaffoldKey, body: _buildBody());
   }
 
-  Widget _buildBody(){return Container(
-    child: Column(
+  Widget _buildBody() {
+    return Container(
+        child: Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         SizedBox(height: 50),
-        Text(
-          'Status : on Verification',
-          style: TextStyle(fontSize: 20),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Status : Verified',
+              style: TextStyle(fontSize: 20),
+            ),
+            Icon(Icons.verified,color: Colors.lightBlue,),
+          ],
         ),
         SizedBox(height: 16),
         CircleAvatar(
@@ -76,37 +80,39 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ),
         Expanded(
             child: Container(
-              width: 380,
-              decoration: BoxDecoration(
-                  color: Colors.grey[300],
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(10),
-                    topRight: Radius.circular(10),
-                  )),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Setting',
-                    style: TextStyle(fontSize: 35),
-                  ),
-                  Text(
-                    'Contact US',
-                    style: TextStyle(fontSize: 35),
-                  ),
-                  Text(
-                    'Share App',
-                    style: TextStyle(fontSize: 35),
-                  ),
-                  Text(
-                    'Logout',
-                    style: TextStyle(fontSize: 35),
-                  ),
-                ],
+          width: 380,
+          decoration: BoxDecoration(
+              color: Colors.grey[300],
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(10),
+                topRight: Radius.circular(10),
+              )),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Setting',
+                style: TextStyle(fontSize: 35),
               ),
-            ))
+              Text(
+                'Contact US',
+                style: TextStyle(fontSize: 35),
+              ),
+              Text(
+                'Share App',
+                style: TextStyle(fontSize: 35),
+              ),
+              Text(
+                'Logout',
+                style: TextStyle(fontSize: 35),
+              ),
+            ],
+          ),
+        ))
       ],
-    ));}
+    ));
+  }
+
   Widget detail({@required Widget header, @required String desc}) {
     return Column(
       children: [header, Text('$desc')],

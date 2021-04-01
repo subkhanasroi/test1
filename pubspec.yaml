@@ -35,6 +35,9 @@ dependencies:
   flutter_markdown: ^0.6.1
   google_fonts: ^2.0.0
   slide_to_act: ^2.0.1
+  dio: ^4.0.0-prev2
+  shared_preferences: ^2.0.3
+  slide_popup_dialog: ^0.0.2
 
 dev_dependencies:
   flutter_test:
