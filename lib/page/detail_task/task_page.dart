@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:test1/dialog/detail_order_dialog.dart';
 import 'package:test1/tool/hex_color.dart';
+import 'package:slide_popup_dialog/slide_popup_dialog.dart' as slideDialog;
 
 class TaskScreen extends StatefulWidget {
   @override
@@ -55,17 +57,18 @@ class _TaskScreenState extends State<TaskScreen> with TickerProviderStateMixin {
                   children: [
                     Container(
                       child: detailOrder(
-                          'Awann Sewu Hotel',
-                          'Ongoing',
-                          '1x standar room',
-                          '03 March 2021',
-                          '14.30-16.30',
-                          'Rp.150.000',
-                          'Cash Payment',
-                          InkWell(
-                            child: Text('detail'),
-                            onTap: () {},
-                          )),
+                        'Awann Sewu Hotel',
+                        'Ongoing',
+                        '1x standar room',
+                        '03 March 2021',
+                        '14.30-16.30',
+                        'Rp.150.000',
+                        'Cash Payment',
+                        InkWell(
+                          child: Text('detail'),
+                          onTap: _detailOrder,
+                        ),
+                      ),
                     ),
                     SizedBox(
                       height: 20,
@@ -81,7 +84,7 @@ class _TaskScreenState extends State<TaskScreen> with TickerProviderStateMixin {
                           'Cash Payment',
                           InkWell(
                             child: Text('detail'),
-                            onTap: () {},
+                            onTap: _detailOrder,
                           )),
                     ),
                   ],
@@ -101,7 +104,7 @@ class _TaskScreenState extends State<TaskScreen> with TickerProviderStateMixin {
                           'Cash Payment',
                           InkWell(
                             child: Text('detail'),
-                            onTap: () {},
+                            onTap: _detailOrder,
                           )),
                     ),
                     SizedBox(
@@ -199,6 +202,13 @@ class _TaskScreenState extends State<TaskScreen> with TickerProviderStateMixin {
           ),
         ],
       ),
+    );
+  }
+
+  void _detailOrder() {
+    slideDialog.showSlideDialog(
+      context: context,
+      child: DetailOrder(),
     );
   }
 }

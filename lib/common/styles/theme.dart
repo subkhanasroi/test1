@@ -6,7 +6,7 @@ ThemeData tdMain(BuildContext context) => ThemeData(
       primarySwatch: mSecondary,
       visualDensity: VisualDensity.adaptivePlatformDensity,
       scaffoldBackgroundColor: hBackground,
-      textTheme: GoogleFonts.montserratTextTheme(
+      textTheme: GoogleFonts.robotoTextTheme(
         Theme.of(context).textTheme,
       ),
       primaryColor: hSecondary,
