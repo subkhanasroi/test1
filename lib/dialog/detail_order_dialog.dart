@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:test1/page/job_progress/main_page.dart';
+import 'package:test1/tool/helper.dart';
 import 'package:test1/tool/hex_color.dart';
 
 class DetailOrder extends StatefulWidget {
@@ -8,11 +10,17 @@ class DetailOrder extends StatefulWidget {
 
 class _DetailOrderState extends State<DetailOrder> {
   GlobalKey<ScaffoldState> _scaffoldKey;
+  Helper _helper;
 
   @override
   void initState() {
     super.initState();
     _scaffoldKey = new GlobalKey<ScaffoldState>();
+    _helper = new Helper();
+  }
+
+  void _jumpToJobProgress() {
+    _helper.jumpToPage(context, page: JobProgress());
   }
 
   Widget build(BuildContext context) {
@@ -203,7 +211,7 @@ class _DetailOrderState extends State<DetailOrder> {
                       'GO TO LOCATION',
                       style: TextStyle(color: Colors.redAccent),
                     ),
-                    onPressed: () {},
+                    onPressed: _jumpToJobProgress,
                   )
                 ],
               ),

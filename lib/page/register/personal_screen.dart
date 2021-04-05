@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-
 import 'package:test1/page/register/upload_data.dart';
+import 'package:test1/tool/helper.dart';
 
 class RegisterPage extends StatefulWidget {
   @override
@@ -10,6 +10,8 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   int _completePage;
   int _currentPage;
+
+
   @override
   void initState() {
     super.initState();
@@ -55,7 +57,7 @@ class _RegisterPageState extends State<RegisterPage> {
         child: Column(
           children: [
             Container(
-              padding: EdgeInsets.only(top: 50, left: 25, right: 25),
+              padding: EdgeInsets.only(left: 25, right: 25, top: 25),
               child: Column(
                 children: [
                   Container(
@@ -108,30 +110,39 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 }
 
-class NextButton extends StatelessWidget {
+class NextButton extends StatefulWidget {
   const NextButton({
     Key key,
   }) : super(key: key);
 
   @override
+  _NextButtonState createState() => _NextButtonState();
+}
+
+class _NextButtonState extends State<NextButton> {
+  Helper _helper;
+
+  @override
+  void initState() {
+    _helper = new Helper();
+    super.initState();
+  }
+
+  void _toUploadData() {
+    _helper.jumpToPage(context, page: UploadData());
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 50,
-      width: 125,
+      height: 35,
+      width: 100,
       child: MaterialButton(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        color: Colors.blue,
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => PersonalDataPage()),
-          );
-        },
+        color: Colors.blueAccent,
+        onPressed:_toUploadData,
         child: Text(
           "Next",
-          style: TextStyle(
-            fontSize: 18,
-          ),
         ),
       ),
     );

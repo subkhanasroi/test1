@@ -35,7 +35,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
               'Status : Verified',
               style: TextStyle(fontSize: 20),
             ),
-            Icon(Icons.verified,color: Colors.lightBlue,),
+            Icon(
+              Icons.verified,
+              color: Colors.lightBlue,
+            ),
           ],
         ),
         SizedBox(height: 16),
@@ -66,7 +69,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            detail(header: Text('13'), desc: 'Total order'),
+            detail(header: Text('13',style: TextStyle(fontSize: 30),), desc: 'Total order'),
             detail(
                 header: Row(
                   children: [Icon(Icons.star), Text('4.9')],
@@ -90,21 +93,77 @@ class _ProfileScreenState extends State<ProfileScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Setting',
-                style: TextStyle(fontSize: 35),
+              Container(height: 50,
+                child: Text(
+                  'Setting',
+                  style: TextStyle(fontSize: 35),
+                ),
               ),
-              Text(
-                'Contact US',
-                style: TextStyle(fontSize: 35),
+              Container(
+                decoration: BoxDecoration(color: Colors.white, boxShadow: [
+                  BoxShadow(color: Colors.grey[100], spreadRadius: 1),
+                ]),
               ),
-              Text(
-                'Share App',
-                style: TextStyle(fontSize: 35),
+              Container(height: 50,
+                child: Text(
+                  'Contact US',
+                  style: TextStyle(fontSize: 35),
+                ),
               ),
-              Text(
-                'Logout',
-                style: TextStyle(fontSize: 35),
+              Container(
+                decoration: BoxDecoration(color: Colors.white, boxShadow: [
+                  BoxShadow(color: Colors.grey[100], spreadRadius: 1),
+                ]),
+              ),
+              Container(height: 50,
+                child: Text(
+                  'Lorem Ipsum',
+                  style: TextStyle(fontSize: 35),
+                ),
+              ),
+              Container(
+                decoration: BoxDecoration(color: Colors.white, boxShadow: [
+                  BoxShadow(color: Colors.grey[100], spreadRadius: 1),
+                ]),
+              ),
+              Container(height: 50,
+                child: Text(
+                  'Lorem Ipsum',
+                  style: TextStyle(fontSize: 35),
+                ),
+              ),
+              Container(
+                decoration: BoxDecoration(color: Colors.white, boxShadow: [
+                  BoxShadow(color: Colors.grey[100], spreadRadius: 1),
+                ]),
+              ),
+              Container(height: 50,
+                child: Text(
+                  'Lorem Ipsum',
+                  style: TextStyle(fontSize: 35),
+                ),
+              ),
+              Container(
+                decoration: BoxDecoration(color: Colors.white, boxShadow: [
+                  BoxShadow(color: Colors.grey[100], spreadRadius: 1),
+                ]),
+              ),
+              Container(height: 50,
+                child: Text(
+                  'Share App',
+                  style: TextStyle(fontSize: 35),
+                ),
+              ),
+              Container(
+                decoration: BoxDecoration(color: Colors.white, boxShadow: [
+                  BoxShadow(color: Colors.grey[100], spreadRadius: 1),
+                ]),
+              ),
+              Container(height: 50 ,
+                child: Text(
+                  'Logout',
+                  style: TextStyle(fontSize: 35),
+                ),
               ),
             ],
           ),
@@ -144,7 +203,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
         continueButton,
       ],
     );
-    // show the dialog
     return showDialog(
       context: context,
       builder: (BuildContext context) {

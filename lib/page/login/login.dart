@@ -1,8 +1,8 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:test1/buttom_navbar/buttom_navbar.dart';
 import 'package:test1/common/constans/image.dart';
-import 'package:test1/page/login/forget_password.dart';
 import 'package:test1/page/register/main_register.dart';
 import 'package:test1/tool/helper.dart';
 // s
@@ -129,10 +129,27 @@ class _NoAccountTextState extends State<NoAccountText> {
   }
 }
 
-class ButtonLogin extends StatelessWidget {
+class ButtonLogin extends StatefulWidget {
   const ButtonLogin({
     Key key,
   }) : super(key: key);
+
+  @override
+  _ButtonLoginState createState() => _ButtonLoginState();
+}
+
+class _ButtonLoginState extends State<ButtonLogin> {
+  Helper _helper;
+
+  @override
+  void initState() {
+    _helper = new Helper();
+    super.initState();
+  }
+
+  void _toHomePage() {
+    _helper.jumpToPage(context, page: ButtonNavbar());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -142,7 +159,7 @@ class ButtonLogin extends StatelessWidget {
       child: MaterialButton(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         color: Colors.blue,
-        onPressed: () {},
+        onPressed: _toHomePage,
         child: Text(
           "Login",
           style: TextStyle(
@@ -150,6 +167,36 @@ class ButtonLogin extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class ForgotPassword extends StatefulWidget {
+  const ForgotPassword({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  _ForgotPasswordState createState() => _ForgotPasswordState();
+}
+
+class _ForgotPasswordState extends State<ForgotPassword> {
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Text("Forgot Password?",
+            style: TextStyle(
+              fontSize: 13,
+            )),
+        GestureDetector(
+          onTap: () {},
+          child: Text(
+            "Click Here",
+            style: TextStyle(fontSize: 13, color: Colors.blue[400]),
+          ),
+        ),
+      ],
     );
   }
 }
@@ -170,7 +217,7 @@ class Email extends StatelessWidget {
       },
       style: TextStyle(fontSize: 20),
       decoration: InputDecoration(
-        prefixIcon: Icon(Icons.email),
+        prefixIcon: Icon(Icons.email_outlined),
         border: InputBorder.none,
         hintText: 'Email',
       ),
@@ -189,7 +236,7 @@ class Password extends StatelessWidget {
       style: TextStyle(fontSize: 20),
       decoration: InputDecoration(
         border: InputBorder.none,
-        prefixIcon: Icon(Icons.lock),
+        prefixIcon: Icon(Icons.lock_outline),
         hintText: 'Password',
       ),
     );

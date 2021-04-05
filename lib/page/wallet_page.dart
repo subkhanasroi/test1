@@ -6,9 +6,18 @@ class WalletScreen extends StatefulWidget {
 }
 
 class _WalletScreenState extends State<WalletScreen> {
+  GlobalKey<ScaffoldState> _scaffoldKey;
+
+  @override
+  void initState() {
+    _scaffoldKey = new GlobalKey<ScaffoldState>();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       body: Column(
         children: [
           TotalWallet(),

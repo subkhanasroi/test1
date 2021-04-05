@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:test1/common/constans/image.dart';
-import 'package:test1/dialog/exit_dialog.dart';
 import 'package:test1/page/notification/notification_screen.dart';
+import 'package:test1/tool/helper.dart';
 import 'package:test1/tool/hex_color.dart';
 
 class HomePageScreen extends StatefulWidget {
@@ -18,18 +18,11 @@ class _HomePageScreenState extends State<HomePageScreen> {
     _scaffoldKey = new GlobalKey<ScaffoldState>();
   }
 
-  Future<bool> _onWillPop() async {
-    return await openExitDialog(context) ?? false;
-  }
-
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      child: Scaffold(
-        key: _scaffoldKey,
-        body: _buildBody(),
-      ),
-      onWillPop: _onWillPop,
+    return Scaffold(
+      key: _scaffoldKey,
+      body: _buildBody(),
     );
   }
 }
@@ -160,10 +153,27 @@ class Wallet extends StatelessWidget {
   }
 }
 
-class Notification extends StatelessWidget {
+class Notification extends StatefulWidget {
   const Notification({
     Key key,
   }) : super(key: key);
+
+  @override
+  _NotificationState createState() => _NotificationState();
+}
+
+class _NotificationState extends State<Notification> {
+  Helper _helper;
+
+  @override
+  void initState() {
+    _helper = new Helper();
+    super.initState();
+  }
+
+  void _toNotificationPage() {
+    _helper.jumpToPage(context, page: NotificationScreen());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -197,12 +207,7 @@ class Notification extends StatelessWidget {
                     color: Colors.grey[500],
                     iconSize: 25,
                     icon: Icon(Icons.notifications),
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => NotificationScreen()));
-                    }),
+                    onPressed: _toNotificationPage),
               ),
             ),
           ),
@@ -259,8 +264,8 @@ class Status extends StatelessWidget {
               backgroundImage: AssetImage(kImgProfile),
             ),
           ),
-          Container(
-              child: Column(
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text('Welcome, Jhon'),
               Row(
@@ -286,7 +291,7 @@ class Status extends StatelessWidget {
                 ],
               )
             ],
-          )),
+          ),
         ],
       ),
     );

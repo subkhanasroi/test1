@@ -1,43 +1,45 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
-import 'package:test1/buttom_navbar/buttom_navbar.dart';
+import 'package:image_picker/image_picker.dart';
 
-
-class PersonalDataPage extends StatelessWidget {
-  static String routeName = '/personaldata';
+class UploadData extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back, color: Colors.black),
-            onPressed: () => Navigator.of(context).pop(),
-          ),
-          title: Text('Register'),
-        ),
-        body: PersonalDataScreen(),
-    );
-  }
+  _UploadDataState createState() => _UploadDataState();
 }
 
-class PersonalDataScreen extends StatefulWidget {
-  @override
-  _PersonalDataScreenState createState() => _PersonalDataScreenState();
-}
-
-class _PersonalDataScreenState extends State<PersonalDataScreen> {
+class _UploadDataState extends State<UploadData> {
+  File _image;
+  final picker = ImagePicker();
+  GlobalKey<ScaffoldState> _scaffoldKey;
   int _completePage;
   int _currentPage;
+
   @override
   void initState() {
     super.initState();
+    _scaffoldKey = new GlobalKey<ScaffoldState>();
     _completePage = 0;
     _currentPage = 1;
+  }
+
+  Future getImage() async {
+    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+    setState(() {
+      if (pickedFile != null) {
+        setState(() {
+          _image = File(pickedFile.path);
+        });
+      } else {
+        print('No image selected');
+      }
+    });
   }
 
   Widget _divider(int i) {
     return Expanded(
       child: Divider(
-        color: _completePage > i ? Colors.grey[300] : Colors.grey[400],
+        color: _completePage > i ? Colors.grey[400] : Colors.grey[300],
         thickness: 4.0,
       ),
     );
@@ -50,7 +52,7 @@ class _PersonalDataScreenState extends State<PersonalDataScreen> {
       width: 32.0,
       height: 32.0,
       decoration: BoxDecoration(
-        color: _currentPage >= num ? Colors.grey[300] : Colors.grey[400],
+        color: _currentPage >= num ? Colors.grey[400] : Colors.grey[300],
         shape: BoxShape.circle,
       ),
       child: Center(
@@ -67,150 +69,115 @@ class _PersonalDataScreenState extends State<PersonalDataScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 125),
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                _pagination(num: 1),
-                _divider(1),
-                _pagination(num: 2),
-              ],
-            ),
+      appBar: AppBar(
+        title: Text('Register'),
+      ),
+      key: _scaffoldKey,
+      body: _buildBody(),
+    );
+  }
+
+  Widget _buildBody() {
+    return Column(
+      children: [
+        Container(
+          padding: EdgeInsets.only(top: 25, left: 125, right: 125),
+          child: Row(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              _pagination(num: 1),
+              _divider(1),
+              _pagination(num: 2),
+            ],
           ),
-          FotoWidget(),
-          KtpWidget(),
-          SKCKWidget(),
-          CVWidget(),
-          SizedBox(
-            height: 50,
-            width: 125,
-            child: MaterialButton(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10)),
-              color: Colors.blue,
-              onPressed: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => ButtonNavbar()),
-                );
-              },
-              child: Text(
-                "Next",
-                style: TextStyle(
-                  fontSize: 18,
+        ),
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: 25),
+          child: Column(
+            children: [
+              GestureDetector(
+                onTap: getImage,
+                child: Row(
+                  children: [
+                    _image != null
+                        ? Container(
+                            child: Image.file(
+                              _image,
+                              width: 100,
+                              height: 100,
+                            ),
+                          )
+                        : Icon(
+                            Icons.add_photo_alternate_outlined,
+                            size: 100,
+                          ),
+                    Text(
+                      'Upload Foto',
+                      style: TextStyle(fontSize: 20),
+                    ),
+                  ],
                 ),
               ),
-            ),
-          )
-        ],
-      ),
-    );
-  }
-}
-
-class FotoWidget extends StatelessWidget {
-  const FotoWidget({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.only(left: 50, top: 25),
-      child: Row(
-        children: [
-          SizedBox(
-              child: IconButton(
-                  iconSize: 75,
-                  icon: Icon(Icons.add_a_photo),
-                  onPressed: () {})),
-          Text(
-            "Upload Foto",
-            style: TextStyle(fontSize: 20),
-          )
-        ],
-      ),
-    );
-  }
-}
-
-class KtpWidget extends StatelessWidget {
-  const KtpWidget({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.only(left: 50, top: 50),
-      child: Row(
-        children: [
-          SizedBox(
-              child: IconButton(
-                  iconSize: 75,
-                  icon: Icon(Icons.add_a_photo),
-                  onPressed: () {})),
-          Text(
-            "Upload KTP",
-            style: TextStyle(fontSize: 20),
-          )
-        ],
-      ),
-    );
-  }
-}
-
-class SKCKWidget extends StatelessWidget {
-  const SKCKWidget({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.only(left: 50, top: 50),
-      child: Row(
-        children: [
-          SizedBox(
-              child: IconButton(
-                  iconSize: 75,
-                  icon: Icon(Icons.add_a_photo),
-                  onPressed: () {})),
-          Text(
-            "Upload SKCK",
-            style: TextStyle(fontSize: 20),
-          )
-        ],
-      ),
-    );
-  }
-}
-
-class CVWidget extends StatelessWidget {
-  const CVWidget({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.only(left: 50, top: 50),
-      child: Row(
-        children: [
-          SizedBox(
-              child: IconButton(
-                  iconSize: 75,
-                  icon: Icon(Icons.add_a_photo),
-                  onPressed: () {})),
-          Text(
-            "Upload CV dan Lamaran",
-            style: TextStyle(fontSize: 20),
-          )
-        ],
-      ),
+              GestureDetector(
+                onTap: getImage,
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.add_photo_alternate_outlined,
+                      size: 100,
+                    ),
+                    Text(
+                      'Upload KTP',
+                      style: TextStyle(fontSize: 20),
+                    ),
+                  ],
+                ),
+              ),
+              GestureDetector(
+                onTap: getImage,
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.add_photo_alternate_outlined,
+                      size: 100,
+                    ),
+                    Text(
+                      'Upload SKCK',
+                      style: TextStyle(fontSize: 20),
+                    ),
+                  ],
+                ),
+              ),
+              GestureDetector(
+                onTap: getImage,
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.add_photo_alternate_outlined,
+                      size: 100,
+                    ),
+                    Text(
+                      'Upload CV dan Lamaran',
+                      style: TextStyle(fontSize: 20),
+                    ),
+                  ],
+                ),
+              ),
+              MaterialButton(
+                onPressed: () {},
+                child: Container(
+                  width: 100,
+                  height: 35,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.blueAccent),
+                  child: Center(child: Text('Next')),
+                ),
+              )
+            ],
+          ),
+        ),
+      ],
     );
   }
 }

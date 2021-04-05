@@ -7,12 +7,21 @@ class NotificationScreen extends StatefulWidget {
 }
 
 class _NotificationScreenState extends State<NotificationScreen> {
+  GlobalKey<ScaffoldState> _scaffoldKey;
+
+  @override
+  void initState() {
+    _scaffoldKey = new GlobalKey<ScaffoldState>();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Notification',
       home: Scaffold(
+          key: _scaffoldKey,
           appBar: AppBar(
             leading: IconButton(
               icon: Icon(Icons.arrow_back, color: Colors.black),
@@ -47,7 +56,9 @@ class _NotificationScreenState extends State<NotificationScreen> {
                 ),
               ),
               GestureDetector(
-                onTap: () {showAlertDialog(context);},
+                onTap: () {
+                  showAlertDialog(context);
+                },
                 child: Container(
                   decoration: BoxDecoration(color: Colors.white, boxShadow: [
                     BoxShadow(color: Colors.grey, spreadRadius: 1),

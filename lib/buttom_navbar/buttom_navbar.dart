@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:test1/dialog/exit_dialog.dart';
+import 'package:test1/page/detail_task/task_page.dart';
 import 'package:test1/page/homepage.dart';
 import 'package:test1/page/profile_page.dart';
-import 'file:///C:/Users/lenovo/Documents/test1/lib/page/detail_task/task_page.dart';
 import 'package:test1/page/wallet_page.dart';
 
 class ButtonNavbar extends StatefulWidget {
@@ -25,22 +26,27 @@ class _ButtonNavbarState extends State<ButtonNavbar> {
     WalletScreen(),
     ProfileScreen(),
   ];
-
+  Future<bool> _onWillPop() async {
+    return await openExitDialog(context) ?? false;
+  }
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: _scaffoldKey,
-      body: Center(
-        child: _pages[_selectedItemIndex],
+    return WillPopScope(
+      child: Scaffold(
+        key: _scaffoldKey,
+        body: Center(
+          child: _pages[_selectedItemIndex],
+        ),
+        bottomNavigationBar: Row(
+          children: [
+            buildNavbarItem(Icons.home_outlined, 0, 'Home'),
+            buildNavbarItem(Icons.insert_drive_file_outlined, 1, 'Task'),
+            buildNavbarItem(Icons.home_repair_service_outlined, 2, 'Wallet'),
+            buildNavbarItem(Icons.account_circle_outlined, 3, 'Profile'),
+          ],
+        ),
       ),
-      bottomNavigationBar: Row(
-        children: [
-          buildNavbarItem(Icons.home_outlined, 0, 'Home'),
-          buildNavbarItem(Icons.insert_drive_file_outlined, 1, 'Task'),
-          buildNavbarItem(Icons.home_repair_service_outlined, 2, 'Wallet'),
-          buildNavbarItem(Icons.account_circle_outlined, 3, 'Profile'),
-        ],
-      ),
+      onWillPop: _onWillPop,
     );
   }
 
